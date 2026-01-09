@@ -1,0 +1,65 @@
+# Dependencies
+**/node_modules
+/node_modules
+
+# SonarQube
+.scannerwork/
+.sonar/
+
+# Testing/Coverage
+**/coverage/
+.nyc_output/
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
+
+# LaTeX build files
+*.aux
+*.glo
+*.idx
+*.log
+*.toc
+*.ist
+*.acn
+*.acr
+*.alg
+*.bbl
+*.blg
+*.dvi
+*.glg
+*.gls
+*.ilg
+*.ind
+*.lof
+*.lot
+*.maf
+*.mtc
+*.mtc1
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bcf
+*.run.xml
+*-blx.bib
+
+# Keep the PDF report if desired, but often it is ignored. 
+# However, usually for homework, the PDF is good to have.
+# !PullaguariAxel_InformeLaboratorio/main.pdf

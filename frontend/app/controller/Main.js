@@ -1,3 +1,4 @@
+/* global Ext */
 Ext.define('ParkingApp.controller.Main', {
     extend: 'Ext.app.Controller',
     
@@ -5,3 +6,4 @@ Ext.define('ParkingApp.controller.Main', {
         console.log('Main controller initialized');
     }
 });
+

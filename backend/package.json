@@ -2,15 +2,31 @@
   "name": "vulnerable-parking-api",
   "version": "1.0.0",
   "description": "Vulnerable REST API for parking zones and spaces",
+  "type": "module",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage --detectOpenHandles"
+  },
+  "jest": {
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "routes/**/*.js",
+      "utils/**/*.js"
+    ],
+    "testEnvironment": "node",
+    "transform": {}
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "pg": "^8.7.1",
-    "body-parser": "^1.19.0"
+    "pg": "^8.7.1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "supertest": "^7.2.2"
+  }
 }

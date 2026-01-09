@@ -1,0 +1,110 @@
+\chapter{Metodología}
+
+La metodología aplicada sigue el ciclo de mejora continua (Plan-Do-Check-Act) adaptado al análisis de código estático.
+
+\section{Fase 1: Configuración del Entorno (Setup)}
+Se utilizó \textbf{Docker Compose} para levantar los servicios necesarios. El archivo \texttt{docker-compose.yml} provisionó:
+\begin{itemize}
+    \item \textbf{SonarQube Community Edition}: Servidor de análisis.
+    \item \textbf{PostgreSQL}: Base de datos persistente para SonarQube y para la aplicación "Parking App".
+\end{itemize}
+Se generó un token de seguridad y se configuró el archivo \texttt{sonar-project.properties} para definir el alcance del análisis.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{images/localhost-8080-zones.png}
+    \includegraphics[width=0.45\textwidth]{images/localhost_8080_spaces.png}
+    \caption{Aplicación "Parking App" en funcionamiento (Zonas y Espacios) previo al análisis.}
+\end{figure}
+
+\section{Fase 2: Análisis Inicial (Diagnóstico)}
+Se ejecutó el comando \texttt{sonar-scanner} sin configuraciones avanzadas inicialmente, y luego con el archivo de propiedades básico.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/firstscanwithoutpropierties.png}
+    \caption{Resultado del primer escaneo sin archivo de propiedades configurado.}
+\end{figure}
+
+Posteriormente, con la configuración aplicada, se obtuvo un estado inicial de \textbf{FAILED}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/overallcode_errors_failed_firsttime.png}
+    \caption{Vista general de errores encontrados en el primer análisis completo.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/overallcode_errors_failed_quilitygate.png}
+    \caption{Detalle del Quality Gate fallido debido a métricas insuficientes.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/reliability_errors.png}
+    \caption{Errores de fiabilidad (Reliability) detectados inicialmente.}
+\end{figure}
+
+Issues críticos detectados:
+\begin{itemize}
+    \item 500+ Code Smells (principalmente estilo y consistencia).
+    \item Vulnerabilidades de Inyección SQL en rutas de API.
+    \item Falta total de Cobertura de Código (0\%).
+\end{itemize}
+
+\section{Fase 3: Configuración de Calidad y Refactorización}
+Para solucionar los problemas, primero se definieron las reglas del juego configurando perfiles de calidad y Quality Gates.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/settingup_qualityprofiles.png}
+    \caption{Configuración de perfiles de calidad (Quality Profiles) para definir las reglas de análisis.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/settingup_qualitygates.png}
+    \caption{Establecimiento de Quality Gates personalizados.}
+\end{figure}
+
+Se procedió a limpiar el código:
+\subsection{Backend}
+\begin{itemize}
+    \item \textbf{Migración a ES Modules}: Cambio de \texttt{require} a \texttt{import/export}.
+    \item \textbf{Seguridad}: Uso de consultas parametrizadas en \texttt{db.query} para prevenir SQL Injection.
+    \item \textbf{Mantenibilidad}: Creación de constantes para códigos HTTP en \texttt{utils/httpStatus.js} y eliminación de números mágicos.
+\end{itemize}
+
+\subsection{Frontend}
+\begin{itemize}
+    \item Corrección de variables globales indefinidas (\texttt{EXT}).
+    \item Adición de atributos de accesibilidad (\texttt{lang}) y seguridad (\texttt{integrity}) en HTML.
+\end{itemize}
+
+\section{Fase 4: Testing y Cobertura}
+Dado que el Quality Gate exigía un 80\% de cobertura, se implementaron pruebas con \textbf{Jest}.
+\begin{verbatim}
+// Ejemplo de Test Unitario
+it('should return all zones', async () => {
+  const mockZones = [{ id: 1, name: 'Zone A' }];
+  db.query.mockResolvedValue({ rows: mockZones });
+  const res = await request(app).get('/zones');
+  expect(res.body).toEqual(mockZones);
+});
+\end{verbatim}
+Se configurarion exclusiones en \texttt{sonar-project.properties} (\texttt{sonar.coverage.exclusions}) para que la métrica se centrara en la lógica de negocio.
+
+Tras las correcciones y la implementación de pruebas, se realizaron nuevos análisis.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/firstscannpassed.png}
+    \caption{Primer análisis exitoso tras las correcciones (Passed).}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/first_history_analyses_post_quality_profiles.png}
+    \caption{Historial de análisis mostrando la evolución positiva del proyecto.}
+\end{figure}

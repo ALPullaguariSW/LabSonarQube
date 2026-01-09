@@ -1,0 +1,14 @@
+\begin{abstract}
+    Este informe presenta los resultados del laboratorio práctico sobre \textbf{Análisis Estático de Código} utilizando \textbf{SonarQube}. El objetivo principal fue auditar y mejorar la calidad de una aplicación web ("Parking App") que presentaba inicialmente una alta deuda técnica y vulnerabilidades críticas.
+    
+    Se desplegó un entorno local mediante \textbf{Docker Compose} para orquestar el servidor de análisis y su base de datos. A través de un ciclo iterativo de escaneo, refactorización y pruebas unitarias (Test Driven Development), se logró:
+    \begin{itemize}
+        \item Eliminar vulnerabilidades de seguridad (SQL Injection).
+        \item Reducir drásticamente los "Code Smells".
+        \item Alcanzar una cobertura de código superior al 80\% mediante pruebas con \textbf{Jest}.
+    \end{itemize}
+    
+    El resultado final es una aplicación robusta que cumple con un \textbf{Quality Gate} estricto, demostrando la importancia de integrar herramientas de calidad continua en el ciclo de vida del desarrollo de software.
+
+    \textbf{Repositorio del Proyecto:} \url{https://github.com/ALPullaguariSW/LabSonarQube}
+\end{abstract}

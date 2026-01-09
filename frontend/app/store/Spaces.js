@@ -1,3 +1,4 @@
+/* global Ext */
 Ext.define('ParkingApp.store.Spaces', {
     extend: 'Ext.data.Store',
     model: 'ParkingApp.model.Space',
@@ -12,3 +13,4 @@ Ext.define('ParkingApp.store.Spaces', {
     },
     autoLoad: true
 });
+

@@ -1,7 +1,8 @@
+/* global Ext */
 // Definir la aplicación primero con todas las dependencias
 Ext.application({
     name: 'ParkingApp',
-    
+
     // Especificar todas las clases que necesita la aplicación
     requires: [
         'Ext.grid.Panel',
@@ -11,20 +12,20 @@ Ext.application({
         'Ext.container.Viewport',
         'Ext.tab.Panel'
     ],
-    
+
     // Definir modelos
     models: ['Zone', 'Space'],
-    
+
     // Definir stores
     stores: ['Zones', 'Spaces'],
-    
+
     // Definir vistas
     views: ['ZoneGrid', 'SpaceGrid'],
-    
-    launch: function() {
-        var zonesStore = Ext.create('ParkingApp.store.Zones');
-        var spacesStore = Ext.create('ParkingApp.store.Spaces');
-        
+
+    launch: function () {
+        const zonesStore = Ext.create('ParkingApp.store.Zones');
+        const spacesStore = Ext.create('ParkingApp.store.Spaces');
+
         Ext.create('Ext.container.Viewport', {
             layout: 'fit',
             items: [{
@@ -33,12 +34,12 @@ Ext.application({
                     {
                         xtype: 'zonegrid',
                         title: 'Zones',
-                        store: zonesStore  
+                        store: zonesStore
                     },
                     {
                         xtype: 'spacegrid',
                         title: 'Spaces',
-                        store: spacesStore  
+                        store: spacesStore
                     }
                 ]
             }]

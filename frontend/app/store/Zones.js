@@ -1,3 +1,4 @@
+/* global Ext */
 Ext.define('ParkingApp.store.Zones', {
     extend: 'Ext.data.Store',
     model: 'ParkingApp.model.Zone',
@@ -12,3 +13,4 @@ Ext.define('ParkingApp.store.Zones', {
     },
     autoLoad: true
 });
+

@@ -1,3 +1,4 @@
+/* global Ext */
 Ext.define('ParkingApp.view.SpaceGrid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.spacegrid',
@@ -21,3 +22,4 @@ Ext.define('ParkingApp.view.SpaceGrid', {
         this.callParent(arguments);
     }
 });
+

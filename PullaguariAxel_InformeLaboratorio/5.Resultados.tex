@@ -1,0 +1,34 @@
+﻿\chapter{Resultados}
+
+\section{Mejora de Métricas de Calidad}
+Tras el proceso de refactorización, se logró reducir drásticamente la deuda técnica y eliminar las vulnerabilidades.
+
+\begin{itemize}
+    \item \textbf{Vulnerabilidades}: De >5 críticas (SQL Injection) a \textbf{0}.
+    \item \textbf{Bugs}: Reducidos a \textbf{0} (Rating A).
+    \item \textbf{Code Smells}: Se resolvieron cientos de problemas de estilo. Los restantes (como trailing commas) se gestionaron mediante reglas de exclusión específicas para evitar conflictos con el linter.
+\end{itemize}
+
+\section{Cobertura de Código}
+La cobertura final alcanzó niveles satisfactorios, permitiendo superar el umbral del Quality Gate.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/cobertura_final_passed_overall.png}
+    \caption{Reporte de cobertura final. Se observa una cobertura alta en los controladores de Backend (routes).}
+\end{figure}
+
+Se alcanzaron los siguientes hitos:
+\begin{itemize}
+    \item \textbf{Routes (Zones \& Spaces)}: ~100\% de cobertura de líneas y ramas, incluyendo manejo de errores (bloques catch).
+    \item \textbf{Exclusiones Correctas}: Archivos como \texttt{server.js} (arranque) o carpetas de reportes/frontend fueron excluidos correctamente para no diluir la métrica real.
+\end{itemize}
+
+\section{Estado Final del Quality Gate}
+El análisis final reportó un estado de éxito total.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/dashboard_final_passed_newcode.png}
+    \caption{Dashboard Final de SonarQube mostrando el estado PASSED en todas las métricas (Mantenibilidad, Fiabilidad, Seguridad).}
+\end{figure}

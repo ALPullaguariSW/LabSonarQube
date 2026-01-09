@@ -1,0 +1,152 @@
+% main.tex - Plantilla académica APA en LaTeX
+% --------------------------------------------------------------------
+% © DESARROLLADO POR ANGEL CUDCO - PLANTILLA DE LIBRE USO
+% 
+% CARACTERÍSTICAS:
+% - Formato APA 7ma edición
+% - Numeración automática de tablas/figuras
+% - Bibliografía con biblatex-apa
+% - Configuración en español
+% 
+% LICENCIA: Libre uso, modificación y distribución
+% AUTOR: Angel Cudco
+% VERSIÓN: 1.0 | 2025
+% --------------------------------------------------------------------
+
+\documentclass[12pt, a4paper, spanish]{report}
+
+% Codificación e idioma
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{csquotes}
+
+% Márgenes
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+% Interlineado doble
+\usepackage{setspace}
+\doublespacing
+
+% Sangría y justificación
+\setlength{\parindent}{1.27cm}
+\usepackage{ragged2e}
+\justifying
+
+% Tablas, figuras y matemáticas
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{amsmath}
+
+% Numeración continua de figuras y tablas (no por capítulo)
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+% Formato de captions y figuras estilo APA (número arriba, título en cursiva debajo)
+\usepackage{caption}
+\usepackage[flushmargin]{footmisc}
+
+\captionsetup[table]{
+  labelfont=bf,
+  textfont=it,
+  labelsep=space,
+  name=Tabla,
+  justification=centering,
+  singlelinecheck=false,
+  position=top
+}
+
+\captionsetup[figure]{
+  labelfont=bf,
+  textfont=it,
+  labelsep=space,
+  name=Figura,
+  justification=centering,
+  singlelinecheck=false,
+  position=top
+}
+
+% Hipervínculos
+\usepackage[colorlinks=true, citecolor=black, linkcolor=black]{hyperref}
+
+% Bibliografía APA 7
+\usepackage[
+  style=apa,
+  backend=biber,
+  sortcites=true,
+  natbib=true,
+  uniquename=false
+]{biblatex}
+\DeclareLanguageMapping{spanish}{spanish-apa}
+\addbibresource{referencias.bib}
+
+% Traducción de etiquetas
+\addto\captionsspanish{
+  \renewcommand{\refname}{REFERENCIAS BIBLIOGRÁFICAS}
+  \renewcommand{\tablename}{Tabla}
+  %\renewcommand{\listtablename}{Listado de Tablas}
+  %\renewcommand{\figurename}{Figura}
+  %\renewcommand{\listfigurename}{Listado de Figuras}
+}
+
+% Formato para el listado de figuras y tablas
+\usepackage{tocloft}
+\renewcommand{\cftfigpresnum}{Figura }
+\renewcommand{\cftfigaftersnum}{}
+\renewcommand{\cftfigaftersnumb}{\quad}
+\setlength{\cftfignumwidth}{3em}
+
+\renewcommand{\cfttabpresnum}{Tabla }
+\renewcommand{\cfttabaftersnum}{}
+\renewcommand{\cfttabaftersnumb}{\quad}
+\setlength{\cfttabnumwidth}{3em}
+
+% Índice incluye bibliografía, pero no el índice mismo
+\usepackage[nottoc]{tocbibind}
+
+% Títulos de capítulo y secciones
+\usepackage{titlesec}
+\titleformat{\chapter}[hang]{\normalfont\bfseries\Huge\filcenter}{}{0pt}{}
+\titlespacing*{\chapter}{0pt}{0pt}{1em}
+
+\titleformat{\section}{\normalfont\large\bfseries\raggedright}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{1em}{0.5em}
+
+\titleformat{\subsection}{\normalfont\normalsize\bfseries\raggedright}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{0.8em}{0.3em}
+
+% Numeración automática de figuras y tablas
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}
+
+\begin{document}
+
+% Carátula y resumen
+\input{0_Caratula}
+\input{01_Resumen}
+
+% Índices
+\tableofcontents
+%\listoftables
+%\listoffigures
+
+% Cuerpo del documento
+\input{1.Introduccion}
+\input{2.Objetivos}
+\input{3.MarcoTeorico}
+\input{4.Metodologia}
+\input{5.Resultados}
+\input{6.Discusion}
+\input{7.Conclusiones}
+
+% Bibliografía
+\nocite{*}
+\printbibliography
+
+% Anexos
+%\input{Anexos}
+
+\end{document}

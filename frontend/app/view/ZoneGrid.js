@@ -1,3 +1,4 @@
+/* global Ext */
 Ext.define('ParkingApp.view.ZoneGrid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.zonegrid',
@@ -20,3 +21,4 @@ Ext.define('ParkingApp.view.ZoneGrid', {
         this.callParent(arguments);
     }
 });
+

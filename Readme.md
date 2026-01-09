@@ -1,19 +1,60 @@
-## Ejecutar el backend
-Dentro del directorio principal ejectur
+# Taller de Análisis Estático con SonarQube - Parking App
+
+Este proyecto es parte del laboratorio de Calidad de Software enfocado en la detección de vulnerabilidades, refactorización y cobertura de código.
+
+## Requisitos Previos
+*   [Node.js](https://nodejs.org/) (v14+)
+*   [Docker Desktop](https://www.docker.com/products/docker-desktop)
+*   [SonarScanner](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/) (Opcional, si no se usa el contenedor)
+
+## 1. Levantar el Entorno (SonarQube + PostgreSQL)
+
+Se utiliza **Docker Compose** para orquestar los servicios. 
+
+```bash
+# Levantar los contenedores en segundo plano
+docker-compose up -d
 ```
+
+*   **SonarQube**: Disponible en [http://localhost:9000](http://localhost:9000) (Credenciales: `admin`/`admin` o `laboratorio123` si ya fue cambiado).
+*   **PostgreSQL**: Disponible en `localhost:5432`.
+
+## 2. Ejecutar la Aplicación "Parking App"
+
+### Backend (Node.js)
+```bash
+cd backend
 npm install
 npm start
 ```
-El API estará disponible en http://localhost:3000. Prueba endpoints como http://localhost:3000/zones en un navegador o Postman.
+La API estará escuchando en `http://localhost:3000`.
 
-## Ejecutar el Frontend:
-El frontend usa ExtJS desde CDN, por lo que no necesita instalación de paquetes.
-Para ejecutarlo se puede usar un servidor HTTP simple
-
+### Frontend (ExtJS)
+No requiere compilación. Simplemente servir el archivo `index.html`.
+```bash
+# En la raíz del proyecto
+npx http-server .
 ```
-npm install -g http-server
-http-server
-```
-Posteriormente acceder a http://localhost:8080 (o el puerto que use http-server) para ver la app. 
+Acceder a la web en `http://localhost:8080`.
 
-Alternativamente, puede abrir el archivo index.html directamente en un navegador (asegúrese de que el backend esté corriendo, ya que hace llamadas a localhost:3000).
+## 3. Ejecutar Análisis de Código (SonarScanner)
+
+Asegúrate de tener configurado el archivo `sonar-project.properties` con tu token.
+
+```bash
+# Ejecutar desde la raíz del proyecto
+sonar-scanner
+```
+
+## 4. Pruebas Unitarias y Cobertura
+
+Para verificar el Quality Gate (Cobertura > 80%), ejecutar los tests de Jest:
+
+```bash
+cd backend
+npm test
+```
+Esto generará los reportes LCOV en `backend/coverage` que son leídos por SonarQube.
+
+## Estructura del Informe
+El informe detallado de este laboratorio se encuentra en la carpeta `PullaguariAxel_InformeLaboratorio/` y el PDF final como `main.pdf`.
