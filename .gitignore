@@ -60,6 +60,11 @@ Thumbs.db
 *.run.xml
 *-blx.bib
 
+# Source LaTeX files (excluded as per user request)
+*.tex
+*.bib
+*.sty
+
 # Keep the PDF report if desired, but often it is ignored. 
 # However, usually for homework, the PDF is good to have.
 # !PullaguariAxel_InformeLaboratorio/main.pdf

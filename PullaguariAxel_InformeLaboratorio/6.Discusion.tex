@@ -1,7 +1,0 @@
-\chapter{Discusión}
-
-El laboratorio evidenció la tensión existente entre reglas de análisis estático estrictas y la realidad del desarrollo. Inicialmente, nos enfrentamos a un problema de reglas contradictorias ("Flapping rules") donde SonarQube sugería eliminar comas finales (Trailing Commas, regla S1537) en una ejecución, y añadirlas (regla S3723) en otra, dependiendo del perfil de calidad activo. Esto demostró la importancia de **personalizar el perfil de calidad** (Quality Profile) y usar archivos de configuración (\texttt{sonar-project.properties}) para ignorar reglas obsoletas o irrelevantes que generan ruido.
-
-Otro punto crucial fue la gestión de la cobertura. Una cobertura del 100\% sobre todo el repositorio es a menudo irreal o ineficiente. Descubrimos que la clave para un Quality Gate útil no es testear todo ciegamente, sino **definir correctamente el alcance** (exclusions). Al excluir el código de "boilerplate" (infraestructura) y enfocarnos en la lógica de negocio crítica, obtuvimos una métrica de confianza real sobre el funcionamiento de la aplicación.
-
-Finalmente, la integración de la seguridad (evitando SQL Injection) mediante análisis estático demostró ser mucho más eficiente que intentar detectar estos fallos en producción, validando el enfoque "Shift-Left" en la seguridad.
